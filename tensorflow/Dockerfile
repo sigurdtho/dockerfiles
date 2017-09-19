@@ -71,12 +71,20 @@ RUN cd tensorflow* && \
     ls -1 && \
     pip3.6 install "$(ls -1 tensorflow*.whl | head -n 1)"
 
+
 RUN pip3.6 install --no-cache-dir \
       bleach>=2.0 \
       html5lib>=0.99999999 \
       keras>=2.0.7 \
       opencv-python>=3.3.0 \
-      jupyter
+      jupyter \
+      numpy \
+      scipy \
+      Pillow \
+      matplotlib \
+      sklearn \
+      pandas \
+      h5py 
 
 RUN apt-get purge --autoremove -y \
       autoconf \
@@ -102,3 +110,6 @@ RUN rm -rf /tmp/*
 WORKDIR /
 
 CMD ["/bin/bash"]
+
+RUN apt-get update && apt-get install -y libgtk2.0-dev
+
