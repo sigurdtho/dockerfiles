@@ -73,7 +73,10 @@ RUN cd tensorflow* && \
 
 RUN pip3.6 install --no-cache-dir \
       bleach>=2.0 \
-      html5lib>=0.99999999
+      html5lib>=0.99999999 \
+      keras>=2.0.7 \
+      opencv-python>=3.3.0 \
+      jupyter
 
 RUN apt-get purge --autoremove -y \
       autoconf \
@@ -88,6 +91,14 @@ RUN apt-get purge --autoremove -y \
       && \
     rm -rf /etc/apt/sources.list.d/*
 
+COPY jupyter_notebook_config.py /root/.jupyter/
+
+COPY run_jupyter.sh /root/
+
+EXPOSE 6006 8888
+
 RUN rm -rf /tmp/*
 
 WORKDIR /
+
+CMD ["/bin/bash"]
